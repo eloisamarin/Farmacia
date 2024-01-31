@@ -3,11 +3,13 @@ package com.generation.farmacia.model;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -46,6 +48,10 @@ public class Produto {
 	
 	@NotNull(message = "A data de validade é obrigatória!")
 	private LocalDate datavalidade;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("protudo")
+	private Categoria categoria;
 
 
 	public Long getId() {
@@ -115,7 +121,18 @@ public class Produto {
 
 	public void setDatavalidade(LocalDate datavalidade) {
 		this.datavalidade = datavalidade;
+	}
+
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}  
+	
 	
 	
 }
